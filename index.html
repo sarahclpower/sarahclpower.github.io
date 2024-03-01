@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <style>
+
+        #deathclock {
+            padding: 10px 15px;
+            width: 500px; /* <-- inner width of box - add 30px (2x15px) to get outer width  */
+            background-color: #e5e5e5;
+        }
+
+            #deathclock .title {
+                font-family: Arial, Arial, Arial;
+                text-align: center;
+                font-size: 25px;
+                color: black;
+                font-weight: bold;
+            }
+
+        #deathclock-display {
+            border: 5px solid white;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 300px; /* <--------- width of number display area */
+            background-color: white;
+            text-align: center;
+        }
+
+        .deathclock-digit, .deathclock-sep {
+            font-weight: bold;
+            font-family: Arial, Arial, Arial;
+            text-align: center;
+            vertical-align: bottom;
+        }
+
+        .deathclock-digit {
+            margin-left: 1px;
+            margin-right: 1px;
+            padding: 1px;
+            background-color: #f8981d;
+            font-size: 50px; /* <--------- size of death clock numbers */
+            color: black;
+        }
+
+        .deathclock-sep {
+            width: 4px; /* <--------- width of thousands separator (comma) */
+            font-size: 50px;
+            color: black;
+        }
+
+        #deathclock .text {
+            clear: both;
+            padding-left: 5px;
+            padding-right: 5px;
+            font-family: Arial, Arial, Arial;
+            font-size: 14px; /* <--------- size of text below death clock */
+            color: black;
+        }
+
+        #deathclock a {
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        function deathclock() {
+
+            var base_time = new Date(Date.UTC(2019, 6, 22, 0, 0, 0, 0));  /* <---------(yyyy,m,d,h,m,s,ms) Base date and time = 1 Jan 2013 00:00:00am UTC (Note 0 = Jan, 1 = Feb, ... 11 = Dec) */
+
+            var base_deaths = 0;      /* <--------- Number of deaths at base date (usually 0, but not necessarily) */
+
+            var year_deaths = 102200; /* <--------- Number of deaths per year    */
+
+            base_time = base_time.getTime() / 1000;
+
+            var curr_time = new Date();
+
+            curr_time = curr_time.getTime() / 1000;
+
+            var elapsed = curr_time - base_time;
+
+            var curr_deaths = base_deaths + year_deaths * elapsed / (365 * 24 * 60 * 60);
+
+            curr_deaths = curr_deaths.toFixed(0);
+
+            curr_deaths = curr_deaths.toString();
+
+            var display = '';
+
+            for (var i = 0; i < curr_deaths.length; i++) {
+
+                if (i != 0 && i % 3 == 0) display = '<span class="deathclock-sep">,</span>' + display;
+
+                display = '<span class="deathclock-digit">' + curr_deaths.charAt(curr_deaths.length - i - 1) + '</span>' + display;
+
+            }
+
+            html = '<div id="deathclock-display">' + display + '</div>';
+
+            var clock_div = document.getElementById('deathclock-div');
+
+            clock_div.innerHTML = html;
+
+        }
+
+    </script>
+
+
+
+
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<!-- Part 2: CSS style -->
+
+<!-- Part 3: HTML text -->
+
+<div id="deathclock">
+
+    <div class="title">We can make smoking history by 2030</div>
+
+    <div class="text">
+
+        <p style="text-align:center">The clock is ticking – every day in England 280 children start smoking. That’s  </p>
+    </div>
+
+    <div id="deathclock-div">
+
+        <script language="javascript">setInterval("deathclock()", 50);</script>
+
+    </div>
+
+    <div class="text">
+
+        <center>
+            <p>since the UK Government announced its ambition for England to be smokefree by 2030.</p>
+
+            <p> The Government must act if this ambition is to be delivered. </p>
+
+            <p><u>Endorse the roadmap to a smokefree 2030.</u></p>
+        </center>
+
+    </div>
+
+</div>
+
