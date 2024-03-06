@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <style>
-
         #deathclock {
             padding: 10px 15px;
-            width: 500px; /* <-- inner width of box - add 30px (2x15px) to get outer width  */
+            width: 500px;
             background-color: #e5e5e5;
         }
 
-            #deathclock .title {
-                font-family: Arial, Arial, Arial;
-                text-align: center;
-                font-size: 25px;
-                color: black;
-                font-weight: bold;
-            }
+        #deathclock .title {
+            font-family: Arial, Arial, Arial;
+            text-align: center;
+            font-size: 25px;
+            color: black;
+            font-weight: bold;
+        }
 
         #deathclock-display {
             border: 5px solid white;
@@ -25,7 +23,7 @@
             margin-bottom: 5px;
             margin-left: auto;
             margin-right: auto;
-            width: 300px; /* <--------- width of number display area */
+            width: 300px;
             background-color: white;
             text-align: center;
         }
@@ -42,12 +40,12 @@
             margin-right: 1px;
             padding: 1px;
             background-color: #f8981d;
-            font-size: 50px; /* <--------- size of death clock numbers */
+            font-size: 50px;
             color: black;
         }
 
         .deathclock-sep {
-            width: 4px; /* <--------- width of thousands separator (comma) */
+            width: 4px;
             font-size: 50px;
             color: black;
         }
@@ -57,7 +55,7 @@
             padding-left: 5px;
             padding-right: 5px;
             font-family: Arial, Arial, Arial;
-            font-size: 14px; /* <--------- size of text below death clock */
+            font-size: 14px;
             color: black;
         }
 
@@ -68,90 +66,49 @@
     </style>
 
     <script type="text/javascript">
-
         function deathclock() {
-
-            var base_time = new Date(Date.UTC(2023, 11, 7, 0, 0, 0, 0));  /* <---------(yyyy,m,d,h,m,s,ms) Base date and time = 1 Jan 2013 00:00:00am UTC (Note 0 = Jan, 1 = Feb, ... 11 = Dec) */
-
-            var base_deaths = 0;      /* <--------- Number of deaths at base date (usually 0, but not necessarily) */
-
-            var year_deaths = 127750; /* <--------- Number of deaths per year    */
-
+            var base_time = new Date(Date.UTC(2023, 11, 7, 0, 0, 0, 0));
+            var base_deaths = 0;
+            var year_deaths = 127750;
             base_time = base_time.getTime() / 1000;
-
             var curr_time = new Date();
-
             curr_time = curr_time.getTime() / 1000;
-
             var elapsed = curr_time - base_time;
-
             var curr_deaths = base_deaths + year_deaths * elapsed / (365 * 24 * 60 * 60);
-
             curr_deaths = curr_deaths.toFixed(0);
-
             curr_deaths = curr_deaths.toString();
-
             var display = '';
-
             for (var i = 0; i < curr_deaths.length; i++) {
-
                 if (i != 0 && i % 3 == 0) display = '<span class="deathclock-sep">,</span>' + display;
-
                 display = '<span class="deathclock-digit">' + curr_deaths.charAt(curr_deaths.length - i - 1) + '</span>' + display;
-
             }
-
-            html = '<div id="deathclock-display">' + display + '</div>';
-
+            var html = '<div id="deathclock-display">' + display + '</div>';
             var clock_div = document.getElementById('deathclock-div');
-
             clock_div.innerHTML = html;
-
         }
-
+        setInterval(deathclock, 1000);
     </script>
-
-
-
 
     <title></title>
 </head>
 <body>
 
-</body>
-</html>
-
-<!-- Part 2: CSS style -->
-
-<!-- Part 3: HTML text -->
-
 <div id="deathclock">
-
     <div class="title">Support the Smokefree Generation legislation</div>
-
     <div class="text">
-
-        <p style="text-align:center">The clock is ticking – every day in the UK, 350 18-25 year olds start smoking regularly. That’s  </p>
+        <p style="text-align:center">The clock is ticking – every day in the UK, 350 18-25 year olds start smoking regularly. That’s</p>
     </div>
-
     <div id="deathclock-div">
-
-        <script language="javascript">setInterval("deathclock()", 50);</script>
-
+        <script language="javascript">deathclock();</script>
     </div>
-
     <div class="text">
-
         <center>
             <p>since the King's speech.</p>
-
             <p> The Government must act.</p>
-
-         /*   <p><u>Let your MP know you support the Smokefree Generation legislation.  
-</u></p>
+            <p><u>Let your MP know you support the Smokefree Generation legislation.</u></p>
         </center>
-
     </div>
-
 </div>
 
+</body>
+</html>
